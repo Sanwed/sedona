@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import deploy from 'gulp-gh-pages';
+import ghPages from 'gulp-gh-pages';
 import plumber from 'gulp-plumber';
 import less from 'gulp-less';
 import postcss from 'gulp-postcss';
@@ -135,10 +135,9 @@ const watcher = () => {
   gulp.watch('source/*.html', gulp.series(html, reload))
 }
 
-export const deploying = (done) => {
-  gulp.src("./build/**/*")
-    .pipe(deploy());
-  done();
+export const deploy = () => {
+  return gulp.src("./build/**/*")
+    .pipe(ghPages());
 }
 
 // Build
