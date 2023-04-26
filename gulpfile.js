@@ -1,5 +1,4 @@
 import gulp from 'gulp';
-import ghPages from 'gulp-gh-pages';
 import plumber from 'gulp-plumber';
 import less from 'gulp-less';
 import postcss from 'gulp-postcss';
