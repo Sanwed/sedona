@@ -16,7 +16,7 @@ import browser from 'browser-sync';
 // Styles
 
 export const styles = () => {
-  return gulp.src('source/less/style.less', { sourcemaps: true })
+  return gulp.src('src/less/style.less', { sourcemaps: true })
     .pipe(plumber())
     .pipe(less())
     .pipe(postcss([
@@ -31,7 +31,7 @@ export const styles = () => {
 // HTML
 
 const html = () => {
-  return gulp.src('source/*.html')
+  return gulp.src('src/*.html')
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('build'))
 }
@@ -39,7 +39,7 @@ const html = () => {
 // Scripts
 
 const scripts = () => {
-  return gulp.src('source/js/*.js')
+  return gulp.src('src/js/*.js')
     .pipe(terser())
     .pipe(gulp.dest('build/js'))
     .pipe(browser.stream())
@@ -48,20 +48,20 @@ const scripts = () => {
 // Images
 
 const optimizeImages = () => {
-  return gulp.src('source/img/**/*.{jpg,png}')
+  return gulp.src('src/img/**/*.{jpg,png}')
     .pipe(squoosh())
     .pipe(gulp.dest('build/img'))
 }
 
 const copyImages = () => {
-  return gulp.src('source/img/**/*.{jpg,png}')
+  return gulp.src('src/img/**/*.{jpg,png}')
     .pipe(gulp.dest('build/img'))
 }
 
 // WebP
 
 const webp = () => {
-  return gulp.src(['source/img/**/*.{jpg,png}', '!source/img/favicons/*.{jpg,png}'])
+  return gulp.src(['src/img/**/*.{jpg,png}', '!src/img/favicons/*.{jpg,png}'])
     .pipe(squoosh({
       webp: {}
     }))
@@ -71,12 +71,12 @@ const webp = () => {
 // SVG
 
 const svg = () =>
-  gulp.src('source/img/*.svg')
+  gulp.src('src/img/*.svg')
     .pipe(svgo())
     .pipe(gulp.dest('build/img'))
 
 const sprite = () => {
-  return gulp.src('source/img/icons/*.svg')
+  return gulp.src('src/img/icons/*.svg')
     .pipe(svgo())
     .pipe(svgstore({
       inlineSvg: true
@@ -93,7 +93,7 @@ const copy = (done) => {
     'source/*.ico',
     'source/*.webmanifest'
   ], {
-    base: 'source'
+    base: 'src'
   })
     .pipe(gulp.dest('build'))
     done()
@@ -129,9 +129,9 @@ const reload = (done) => {
 // Watcher
 
 const watcher = () => {
-  gulp.watch('source/less/**/*.less', gulp.series(styles));
-  gulp.watch('source/js/*.js', gulp.series(scripts))
-  gulp.watch('source/*.html', gulp.series(html, reload))
+  gulp.watch('src/less/**/*.less', gulp.series(styles));
+  gulp.watch('src/js/*.js', gulp.series(scripts))
+  gulp.watch('src/*.html', gulp.series(html, reload))
 }
 
 export const deploy = () => {
