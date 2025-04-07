@@ -16,6 +16,10 @@
   width: 100%;
   .text-size(18px, 26px);
 
+  &.error {
+    box-shadow: inset 0 0 0 4px @error-color;
+  }
+
   &::placeholder {
     color: fade(@black, 30%);
   }
