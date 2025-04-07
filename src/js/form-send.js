@@ -63,16 +63,11 @@ form.addEventListener('submit', (e) => {
   form.querySelectorAll('.error').forEach((el) => el.classList.remove('error'));
 
   requiredInputs.forEach(input => {
-    if (!isRequiredFilled(input)) {
-      input.classList.add('error');
-      isValid = false;
-    } else if (
-      (input.id === 'name' || input.id === 'surname' || input.id === 'patronymic') &&
-      !isCyrillic(input.value)
+    if ((!isRequiredFilled(input)) ||
+      ((input.id === 'name' || input.id === 'surname' || input.id === 'patronymic') &&
+        !isCyrillic(input.value)) ||
+      (input.type === 'email' && !isValidEmail(input.value))
     ) {
-      input.classList.add('error');
-      isValid = false;
-    } else if (input.type === 'email' && !isValidEmail(input.value)) {
       input.classList.add('error');
       isValid = false;
     }
